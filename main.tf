@@ -145,18 +145,6 @@ resource "aws_instance" "web_server" {                            # BLOCK
   }
 }
 
-resource "aws_instance" "web" {
-  ami                    = "ami-02396cdd13e9a1257"
-  instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.public_subnets["public_subnet_1"].id
-  vpc_security_group_ids = ["sg-00174cb932568592e"]
-
-  tags = {
-    Name        = "New web linux"
-    "Terraform" = "true"
-  }
-}
-
 resource "aws_s3_bucket" "my-new-s3-bucket" {
   bucket = "my-new-tf-bucket-elvis-230423"
 
@@ -164,11 +152,6 @@ resource "aws_s3_bucket" "my-new-s3-bucket" {
     "Name"    = "My s3 bucket"
     "purpose" = "Adding new resource - S3"
   }
-}
-
-resource "aws_s3_bucket_acl" "my-new-s3-bucket-acl" {
-  bucket = aws_s3_bucket.my-new-s3-bucket.id
-  acl    = "private"
 }
 
 resource "aws_security_group" "my-new-security-group" {
